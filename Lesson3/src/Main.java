@@ -10,7 +10,7 @@ public class Main {
         System.out.println(operation(0));
         System.out.println(calculateCountOfOddElementsInMatrix(new int[]{1, 2, 3, 4, 5, 6}));
         calculateSumOfDiagonalElements();
-        countDevs(103);
+        countDevs(111);
         foobar(6);
         foobar(10);
         foobar(15);
@@ -51,14 +51,13 @@ public class Main {
     public static int operation(int number) {
 
         if (number > 0) {
-            number++;
+            return ++number;
         } else if (number < 0) {
-            number = number - 2;
+            return number - 2;
         } else {
-            number = 10;
+            return 10;
         }
 
-        return number;
     }
 
     /**
@@ -89,13 +88,13 @@ public class Main {
      * @param count - количество программистов
      */
     public static void countDevs(int count) {
-        if (count == 11) {
+        if (count % 100 >= 11 && count % 100 <= 19) {
             System.out.println(count + " программистов");
         } else if (count % 10 == 1) {
             System.out.println(count + " программист");
         } else if (count % 10 >= 2 && count % 10 <= 4) {
             System.out.println(count + " программиста");
-        } else if (count % 10 >= 5 || count % 10 == 0) {
+        } else {
             System.out.println(count + " программистов");
         }
     }
@@ -195,12 +194,13 @@ public class Main {
      * что такое просто число (https://www.webmath.ru/poleznoe/formules_18_5.php)
      */
     public static void printPrimeNumbers() {
-        one:
+        boolean flag;
         for (int i = 2; i < 1000; i++) {
+            flag = true;
             for (int n = 2; n <= i; n++) {
                 if (i % n == 0 && i != n) {
-                    continue one;
-                } else if (i % n == 0 && i == n) {
+                    flag = false;
+                } else if (i % n == 0 && i == n && flag) {
                     System.out.println(i);
                 }
             }
