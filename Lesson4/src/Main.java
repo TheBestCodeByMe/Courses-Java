@@ -13,7 +13,7 @@ public class Main {
         printMass();
         printmassr();
         proverkaMass(new int[]{1, 6, 353, 3, 25});
-        proverkaMass(new int[]{1, 6, 353, 25,1});
+        proverkaMass(new int[]{1, 6, 353, 25, 1});
         kvadrMatr();
     }
 
@@ -22,9 +22,9 @@ public class Main {
 //   сколько амеб будет через 3, 6, 9, 12,..., 24 часа
 
     public static void numbOfAmoebas() {
-        int kol = 0;
+        int kol = 1;
         for (int time = 3; time <= 24; time = time + 3) {
-            kol = kol + 2;
+            kol = kol * 2;
             System.out.println("The number of amoebas after " + time + " hours is equal to " + kol);
         }
         System.out.println("\n");
@@ -35,9 +35,29 @@ public class Main {
 
     public static void summ(int a, int b) {
         int rez = 0;
-        for (int i = 0; i < b; i++) {
-            rez = rez + a;
+        if (a > 0 && b > 0) {
+            for (int i = 0; i < b; i++) {
+                rez = rez + a;
+            }
+        } else if (a == 0 || b == 0) {
+            System.out.println(rez);
+        } else if (a < 0 && b > 0) {
+            int c = -a;
+            for (int i = 0; i < b; i++) {
+                rez = rez + c;
+            }
+            rez=-rez;
+        } else if (a > 0) {
+            for (int i = 0; i < a; i++) {
+                rez = rez + (-b);
+            }
+            rez = -rez;
+        } else {
+            for (int i = 0; i < (-b); i++) {
+                rez = rez + (-a);
+            }
         }
+
         System.out.println(rez);
         System.out.println("\n");
     }
@@ -174,7 +194,7 @@ public class Main {
                 number = i;
             }
         }
-        System.out.println("\n" + ++number + "\n");
+        System.out.println("\nМаксимальный элемент: " + mass[number] + "\nИндекс последнего вхождения: " + ++number + "\n");
     }
 
 //        7) Создайте массив размера 20, заполните его случайными целыми чиселами из отрезка от 0 до 20.
@@ -203,6 +223,21 @@ public class Main {
 
     //        8) Найти максимальный элемент в массиве {4,5,0,23,77,0,8,9,101,2} и поменять его местами с нулевым элементом
     public static void printmassr() {
+        int[] numbers = new int[]{4, 5, 0, 23, 77, 0, 8, 9, 101, 2};
+        int currentMax = Integer.MIN_VALUE;
+        int maxPlace = -1;
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] > currentMax) {
+                currentMax = numbers[i];
+                maxPlace = i;
+            }
+        }
+        int tempMaxHolder = numbers[maxPlace];
+        numbers[maxPlace] = numbers[0];
+        numbers[0] = tempMaxHolder;
+        System.out.println(Arrays.toString(numbers));
+        System.out.println();
+        /*
         //Не поняла с последним 0 или с 1, или вообще оба менять
         int[] mass = {4, 5, 0, 23, 77, 0, 8, 9, 101, 2};
         int rez = 0, numbermax = 0, number0 = 0, number00 = 0;
@@ -264,6 +299,7 @@ public class Main {
         for (int j : mass) {
             System.out.print(j + " ");
         }
+        */
         System.out.println("\n");
     }
 //        9) Проверить, различны ли все элементы массива, если не различны то вывести элемент повторяющийся
@@ -281,9 +317,11 @@ public class Main {
         for (int i = 0; i < mass.length; i++) {
             rez = mass[i];
             for (int j = 0; j < mass.length; j++) {
-                if(rez==mass[j]&&j!=i){
-                    mass1[i]=Integer.toString(mass[j]);
-                } else {mass1[i] = "*";}
+                if (rez == mass[j] && j != i) {
+                    mass1[i] = Integer.toString(mass[j]);
+                } else {
+                    mass1[i] = "*";
+                }
             }
         }
 
@@ -294,8 +332,7 @@ public class Main {
             }
         }
 
-        if(flag)
-        {
+        if (flag) {
             System.out.println("Массив не имеет повторяющих элементов");
         } else {
             System.out.println("Массив имеет повторяющиеся элементы: ");
@@ -317,8 +354,7 @@ public class Main {
 //          3 3 4 5      3 8 4 6
 //          1 5 6 7      4 9 5 7
 
-    public static void kvadrMatr()
-    {
+    public static void kvadrMatr() {
         Scanner vvod = new Scanner(System.in);
         Random rand = new Random();
         System.out.println("Введите размер матрицы: ");
