@@ -4,11 +4,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Computer {
-    String interpreter;
-    int ram;
-    String hardDrive;
-    int workCycle;
-    boolean flag2 = true;
+    private String interpreter;
+    private int ram;
+    private String hardDrive;
+    private int workCycle;
+    private boolean burned = false;
 
     public Computer(String interpreter, int ram, String hardDrive, int workCycle) {
         this.interpreter = interpreter;
@@ -17,72 +17,51 @@ public class Computer {
         this.workCycle = workCycle;
     }
 
-    @Override
-    public String toString() {
-        return "Computer{" +
-                "interpreter = '" + interpreter + '\'' +
-                ", ram = " + ram +
-                ", hardDrive = '" + hardDrive + '\'' +
-                ", workCycle = " + workCycle +
-                '}';
-    }
-
     public void on() {
-        Random rand = new Random();
-        int number, numberRand;
-
         System.out.println("Вызван метод включения.");
+        boolean flag;
 
-        number = func();
-        numberRand = rand.nextInt(2);
-
-        if (number != 2) {
-            if (flag2) {
-                if (number == numberRand) {
-                    off();
-                } else {
-                    System.out.println("Компьютер сгорел!");
-                    flag2 = false;
-                }
+        flag = checkAction();
+        if (!burned) {
+            if (flag) {
+                off();
+                workCycle--;
             } else {
-                System.out.println("Компьютер сгорел! Вы не можете повторно его включить!");
+                System.out.println("Компьютер сгорел!");
+                workCycle--;
+                burned = true;
             }
         } else {
-            System.out.println("Компьютер сгорел");
-            flag2 = false;
+            System.out.println("Компьютер сгорел! Вы не можете повторно его включить!");
         }
     }
 
     public void off() {
-        Random rand = new Random();
-        int number, numberRand;
         System.out.println("Вызван метод выключения.");
+        boolean flag;
 
-        number = func();
-        numberRand = rand.nextInt(2);
-
-        if (number != 2) {
-            if (flag2) {
-                if (number == numberRand) {
+        flag = checkAction();
+            if (!burned) {
+                if (flag) {
                     on();
+                    workCycle--;
                 } else {
                     System.out.println("Компьютер сгорел!");
-                    flag2 = false;
+                    workCycle--;
+                    burned = true;
                 }
             } else {
                 System.out.println("Компьютер сгорел! Вы не можете повторно его включить!");
             }
-        } else {
-            System.out.println("Компьютер сгорел");
-            flag2 = false;
-        }
     }
 
-    public int func() {
+    public boolean checkAction() {
 
         Scanner scanner = new Scanner(System.in);
-        boolean flag = true, flag1 = true;
+        boolean flag = true;
         int number = 2;
+        Random rand = new Random();
+        int numberRand;
 
         while (flag) {
             System.out.println("Внимание! Введите 0 или 1: ");
@@ -94,20 +73,59 @@ public class Computer {
 
             if (number == 0 || number == 1) {
                 flag = false;
-                workCycle--;
             } else {
                 System.out.println("Это не 0 или 1. Введите другое число!");
             }
         }
 
+        numberRand=rand.nextInt(2);
+
         if (workCycle != 0) {
-            if (number == 0) {
-                return 0;
-            } else {
-                return 1;
-            }
+            return number == numberRand;
         } else {
-            return 2;
+            return false;
         }
+    }
+
+    public String getInterpreter() {
+        return interpreter;
+    }
+
+    public void setInterpreter(String interpreter) {
+        this.interpreter = interpreter;
+    }
+
+    public int getRam() {
+        return ram;
+    }
+
+    public void setRam(int ram) {
+        this.ram = ram;
+    }
+
+    public String getHardDrive() {
+        return hardDrive;
+    }
+
+    public void setHardDrive(String hardDrive) {
+        this.hardDrive = hardDrive;
+    }
+
+    public int getWorkCycle() {
+        return workCycle;
+    }
+
+    public void setWorkCycle(int workCycle) {
+        this.workCycle = workCycle;
+    }
+
+    @Override
+    public String toString() {
+        return "Computer{" +
+                "interpreter = '" + interpreter + '\'' +
+                ", ram = " + ram +
+                ", hardDrive = '" + hardDrive + '\'' +
+                ", workCycle = " + workCycle +
+                '}';
     }
 }
