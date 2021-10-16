@@ -8,7 +8,7 @@ public class Computer {
     private int ram;
     private String hardDrive;
     private int workCycle;
-    private boolean burned = false;
+    private boolean burned;
 
     public Computer(String interpreter, int ram, String hardDrive, int workCycle) {
         this.interpreter = interpreter;
@@ -23,12 +23,11 @@ public class Computer {
 
         flag = checkAction();
         if (!burned) {
-            if (flag) {
+            if (flag && workCycle > 0) {
                 off();
                 workCycle--;
             } else {
                 System.out.println("Компьютер сгорел!");
-                workCycle--;
                 burned = true;
             }
         } else {
@@ -42,12 +41,11 @@ public class Computer {
 
         flag = checkAction();
             if (!burned) {
-                if (flag) {
+                if (flag && workCycle > 0) {
                     on();
-                    workCycle--;
+                    //workCycle--; // Почему тут не нужно уменьшать, если при включении ресурс и включений, и выключений уменьшается?
                 } else {
                     System.out.println("Компьютер сгорел!");
-                    workCycle--;
                     burned = true;
                 }
             } else {
@@ -58,11 +56,11 @@ public class Computer {
     public boolean checkAction() {
 
         Scanner scanner = new Scanner(System.in);
-        boolean flag = true;
         int number = 2;
         Random rand = new Random();
         int numberRand;
 
+        boolean flag = true;
         while (flag) {
             System.out.println("Внимание! Введите 0 или 1: ");
             while (!scanner.hasNextInt()) {
@@ -80,11 +78,7 @@ public class Computer {
 
         numberRand=rand.nextInt(2);
 
-        if (workCycle != 0) {
-            return number == numberRand;
-        } else {
-            return false;
-        }
+        return number == numberRand;
     }
 
     public String getInterpreter() {
