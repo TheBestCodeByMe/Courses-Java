@@ -1,66 +1,29 @@
 package com.home.service;
 
+import com.home.model.AddPerson;
 import com.home.model.MilitaryOffice;
 import com.home.model.Person;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         List<Person> personRegistry = new ArrayList<>();
+        AddPerson addPerson = new AddPerson();
+        addPerson.addPerson();
+
         MilitaryOffice militaryOffice = new MilitaryOffice(personRegistry);
-        String name;
-        int age;
-        String sex;
-        //String[] adress = new String[2];
-        String approval;
-        List<String> adress = new ArrayList<>();
+        // Не могу понять, помогииииите, хаха, как вызвать функции этого класса без заполнения
+        // класса отсюда
+        // Если добавлять с main, то всё работает, если с отдельного класса, то из-за
+        // инициализации класса милитэриОфис пустой
 
-        do {
-            System.out.println("Введите имя призывника: ");
-            name = scanner.next();
-
-            System.out.println("Введите возраст призывника: ");
-            do {
-                while (!scanner.hasNextInt()) {
-                    System.out.println("Вы ввели не число! Введите повторно: ");
-                    scanner.next();
-                }
-                age = scanner.nextInt();
-            } while (age <= 0);
-
-            System.out.println("Введите пол призывника: "); // Проверку на пол нужно было делать?
-            sex = scanner.next();
-
-            System.out.println("Введите страну: ");
-            adress.add(0, scanner.next());
-            //adress[0] = scanner.next();
-            //str = scanner.next();
-
-            System.out.println("Введите город: ");
-            adress.add(1, scanner.next());
-            //adress[1] = scanner.next();
-            //gorod = scanner.next();
-
-            personRegistry.add(new Person(
-                    name,
-                    age,
-                    sex,
-                    adress
-                    //new Adress(str, gorod)
-            ));
-
-            System.out.println("Вы хотите ввести ещё одного? Введите да, если да: ");
-            approval = scanner.next();
-        } while (approval.equalsIgnoreCase("yes"));
-
-        militaryOffice.printAbleBoilied();
-        militaryOffice.printAmountMinsk();
-        militaryOffice.printAmount2527();
-        militaryOffice.printAmountAlexandr();
+        System.out.println("Годные призывники:\n"+ militaryOffice.printAbleBoilied() + "\n");
+        System.out.println("Количество годных призывников из Минска = " + militaryOffice.AmountCity("Минск") + "\n");
+        int minAge = 25, maxAge = 27;
+        System.out.println("Количество призывников от " + minAge + " до " + maxAge + " = " + militaryOffice.AmountAge(minAge, maxAge) + "\n");
+        String name1 = "Александр";
+        System.out.println("Количество призывников с именем " + name1 + " = " + militaryOffice.AmountName(name1) + "\n");
     }
 }

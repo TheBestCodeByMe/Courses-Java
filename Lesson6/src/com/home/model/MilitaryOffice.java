@@ -1,57 +1,59 @@
 package com.home.model;
 
+import com.home.utils.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class MilitaryOffice {
-    private List<Person> personRegistry;
+    List<Person> personRegistry;
 
-    public void printAbleBoilied() {
-        System.out.println("Годные призывники: ");
-        for (Person person : personRegistry) {
-            if (person.getAge() >= 18 && person.getAge() < 27 && person.getSex().equalsIgnoreCase("Мужчина")) {
-                System.out.println(person.getName());
-            }
-        }
-        System.out.println();
-    }
-
-    public void printAmountMinsk() {
-        int amount = 0;
-        for (Person person : personRegistry) {
-            if (person.getAdress().get(1).equalsIgnoreCase("Минск") && person.getAge() >= 18 && person.getAge() < 27 && person.getSex().equalsIgnoreCase("Мужчина")) {
-                amount++;
-            }
-        }
-        System.out.println("Количество годных призывников из Минска = " + amount);
-        System.out.println();
-    }
-
-    public void printAmount2527() {
-        int amount = 0;
-        for (Person person : personRegistry) {
-            if (person.getAge() >= 25 && person.getAge() < 27) {
-                amount++;
-            }
-        }
-        System.out.println("Количество призывников от 25 до 27 = " + amount);
-        System.out.println();
-    }
-
-    public void printAmountAlexandr() {
-        //будет количество годных Alexandr
-        int amount = 0;
-        for (Person person : personRegistry) {
-            if (person.getName().equalsIgnoreCase("Александр")) {
-                amount++;
-            }
-        }
-        System.out.println("Количество призывников с именем Александр = " + amount);
-        System.out.println();
-    }
+    Constants constans = new Constants();
 
     public MilitaryOffice(List<Person> personRegistry) {
         this.personRegistry = personRegistry;
+    }
+
+    public List<String> printAbleBoilied() {
+        List<String> list = new ArrayList<>();
+        for (Person person : personRegistry) {
+            if (person.getAge() >= constans.getMinAge() && person.getAge() < constans.getMaxAge() && person.getSex().equalsIgnoreCase(constans.getValidSex())) {
+                list.add(person.getName());
+            }
+        }
+        if (list.isEmpty()) {
+            list.add("Таких нет");
+        }
+        return list;
+    }
+
+    public int AmountCity(String city) {
+        int amount = 0;
+        for (Person person : personRegistry) {
+            if (person.getAdress().getCity().equalsIgnoreCase(city) && person.getAge() >= constans.getMinAge() && person.getAge() < constans.getMaxAge() && person.getSex().equalsIgnoreCase(constans.getValidSex())) {
+                amount++;
+            }
+        }
+        return amount;
+    }
+
+    public int AmountAge(int minAge, int maxAge) {
+        int amount = 0;
+        for (Person person : personRegistry) {
+            if (person.getAge() >= minAge && person.getAge() < maxAge) {
+                amount++;
+            }
+        }
+        return amount;
+    }
+
+    public int AmountName(String name) {
+        int amount = 0;
+        for (Person person : personRegistry) {
+            if (person.getName().equalsIgnoreCase(name)) {
+                amount++;
+            }
+        }
+        return amount;
     }
 }
