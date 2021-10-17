@@ -7,7 +7,7 @@ public class Person {
     private String name;
     private int age;
     private String sex;
-    private List<String> adress;
+    private Adress adress;
 
     public String getName() {
         return name;
@@ -33,15 +33,15 @@ public class Person {
         this.sex = sex;
     }
 
-    public List<String> getAdress(){
+    public Adress getAdress() {
         return adress;
     }
 
-    public void setAdress(List<String> adress){
+    public void setAdress(Adress adress) {
         this.adress = adress;
     }
 
-    public Person(String name, int age, String sex, List<String> adress) {
+    public Person(String name, int age, String sex, Adress adress) {
         this.name = name;
         this.age = age;
         this.sex = sex;
