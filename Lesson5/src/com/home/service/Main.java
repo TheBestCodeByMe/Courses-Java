@@ -15,6 +15,7 @@ public class Main {
 
         //System.out.println(comp.toString());
 
+
         for (int i = 0; i < workCycle; i++) {
             comp.on();
         }
