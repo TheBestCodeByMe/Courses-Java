@@ -28,15 +28,16 @@ public class PersonUtils {
         } while (age <= 0);
 
         System.out.println("Введите пол призывника: ");
-            /*do {
-                String enter = scanner.next();
-                if (!enter.equalsIgnoreCase("Мужчина") || !enter.equalsIgnoreCase("Женщина")) {
-                    System.out.println("Вы ввели пол, который не существует! Введите мужчина или женщина: ");
-                } else {
+        String enter;
+            do {
+                enter = scanner.next();
+                if (enter.equals("Мужчина") || enter.equals("Женщина")) {
                     break;
+                } else {
+                    System.out.println("Вы ввели пол, который не существует! Введите мужчина или женщина: ");
                 }
-            } while (true);*/
-        sex = scanner.next();
+            } while (true);
+        sex = enter;
         // Подумаю над этим, пока нет времени
 
         System.out.println("Введите страну: ");
