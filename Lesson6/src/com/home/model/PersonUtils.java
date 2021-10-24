@@ -8,50 +8,55 @@ public class PersonUtils {
     public List<Person> addPerson() {
         Scanner scanner = new Scanner(System.in);
         List<Person> personRegistry = new ArrayList<>();
-        MilitaryOffice militaryOffice = new MilitaryOffice(personRegistry);
         String name;
         int age;
         String sex;
         String country, city;
+        String approval;
 
-
-        System.out.println("Введите имя призывника: ");
-        name = scanner.next();
-
-        System.out.println("Введите возраст призывника: ");
         do {
-            while (!scanner.hasNextInt()) {
-                System.out.println("Вы ввели не число! Введите повторно: ");
-                scanner.next();
-            }
-            age = scanner.nextInt();
-        } while (age <= 0);
+            System.out.println("Введите имя призывника: ");
+            name = scanner.next();
 
-        System.out.println("Введите пол призывника: ");
-        String enter;
+            System.out.println("Введите возраст призывника: ");
+            while (true) {
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Вы ввели не число! Введите повторно: ");
+                    scanner.next();
+                }
+                age = scanner.nextInt();
+                if (age <= 0) {
+                    System.out.println("Число должно быть положительным! Введите число, которое больше 0: ");
+                } else {
+                    break;
+                }
+            }
+
+            System.out.println("Введите пол призывника: ");
             do {
-                enter = scanner.next();
-                if (enter.equals("Мужчина") || enter.equals("Женщина")) {
+                sex = scanner.next();
+                if (sex.equals("Мужчина") || sex.equals("Женщина")) {
                     break;
                 } else {
-                    System.out.println("Вы ввели пол, который не существует! Введите мужчина или женщина: ");
+                    System.out.println("Вы ввели пол, которого не существует! Введите мужчина или женщина: ");
                 }
             } while (true);
-        sex = enter;
-        // Подумаю над этим, пока нет времени
 
-        System.out.println("Введите страну: ");
-        country = scanner.next();
+            System.out.println("Введите страну: ");
+            country = scanner.next();
 
-        System.out.println("Введите город: ");
-        city = scanner.next();
+            System.out.println("Введите город: ");
+            city = scanner.next();
 
-        personRegistry.add(new Person(
-                name,
-                age,
-                sex,
-                new Adress(country, city)
-        ));
+            personRegistry.add(new Person(
+                    name,
+                    age,
+                    sex,
+                    new Adress(country, city)
+            ));
+            System.out.println("Вы хотите ввести ещё одного? Введите да, если да: ");
+            approval = scanner.next();
+        } while (approval.equalsIgnoreCase("да"));
         return personRegistry;
     }
 }

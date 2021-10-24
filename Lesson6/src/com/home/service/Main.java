@@ -11,26 +11,19 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         List<Person> personRegistry;
         PersonUtils addPerson = new PersonUtils();
 
-        String approval;
-
-        do {
-            //addPerson.addPerson();
-            personRegistry = addPerson.addPerson();
-
-            System.out.println("Вы хотите ввести ещё одного? Введите да, если да: ");
-            approval = scanner.next();
-        } while (approval.equalsIgnoreCase("да"));
+        personRegistry = addPerson.addPerson();
 
         MilitaryOffice militaryOffice = new MilitaryOffice(personRegistry);
 
         System.out.println("Годные призывники:\n");
         if (militaryOffice.printAbleBoilied().isEmpty()) {
             System.out.println("Таких нет.");
-        } else System.out.println(militaryOffice.printAbleBoilied() + "\n");
+        } else {
+            System.out.println(militaryOffice.printAbleBoilied() + "\n");
+        }
         System.out.println("Количество годных призывников из Минска = " + militaryOffice.getPersonsByCity("Минск") + "\n");
         int minAge = 25, maxAge = 27;
         System.out.println("Количество призывников от " + minAge + " до " + maxAge + " = " + militaryOffice.getPersonsByAge(minAge, maxAge) + "\n");

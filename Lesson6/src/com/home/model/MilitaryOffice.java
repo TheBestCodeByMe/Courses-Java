@@ -15,7 +15,7 @@ public class MilitaryOffice {
     public List<String> printAbleBoilied() {
         List<String> list = new ArrayList<>();
         for (Person person : personRegistry) {
-            if (person.getAge() >= Constants.minAge && person.getAge() < Constants.maxAge && person.getSex().equalsIgnoreCase(Constants.validSex)) {
+            if (person.getAge() >= Constants.MIN_AGE && person.getAge() < Constants.MAX_AGE && person.getSex().equalsIgnoreCase(Constants.VALID_SEX)) {
                 list.add(person.getName());
             }
         }
@@ -25,7 +25,7 @@ public class MilitaryOffice {
     public int getPersonsByCity(String city) {
         int amount = 0;
         for (Person person : personRegistry) {
-            if (person.getAdress().getCity().equalsIgnoreCase(city) && person.getAge() >= Constants.minAge && person.getAge() < Constants.maxAge && person.getSex().equalsIgnoreCase(Constants.validSex)) {
+            if (person.getAdress().getCity().equalsIgnoreCase(city) && person.getAge() >= Constants.MIN_AGE && person.getAge() < Constants.MAX_AGE && person.getSex().equalsIgnoreCase(Constants.VALID_SEX)) {
                 amount++;
             }
         }
