@@ -8,7 +8,10 @@ public class Car {
         System.out.println("\nМашина создана\n");
     }
 
-    public static class Engine {
+    public Car() {
+    }
+
+    public class Engine {
         private static String engine;
         private static String type;
 
@@ -17,17 +20,21 @@ public class Car {
             Engine.type = type;
         }
 
-        private static void on() {
+        public Engine() {
+
+        }
+
+        private void on() {
             System.out.println("\nДвигатель включён.\n");
             Car.carStarted = true;
         }
 
-        private static void off() {
+        private void off() {
             System.out.println("\nДвигатель выключён.\n");
             Car.carStarted = false;
         }
 
-        public static void viewType() {
+        public void viewType() {
             System.out.println("\nТип двигателя " + type + "\n");
         }
 
@@ -35,12 +42,12 @@ public class Car {
             return type;
         }
 
-        public static void setType(String type) {
+        public void setType(String type) {
             Engine.type = type;
         }
     }
 
-    public static class GasTank {
+    public class GasTank {
         private static int fuel;
         private static int totalVolumeFuel;
 
@@ -49,15 +56,19 @@ public class Car {
             GasTank.totalVolumeFuel = totalVolumeFuel;
         }
 
-        public static void viewFuel() {
+        public GasTank() {
+
+        }
+
+        public void viewFuel() {
             System.out.println("\nОсталось " + fuel + " литров топлива.\n");
         }
 
-        public static int getFuel() {
+        public int getFuel() {
             return fuel;
         }
 
-        public static void setFuel(int fuel) {
+        public void setFuel(int fuel) {
             if ((GasTank.fuel + fuel) < totalVolumeFuel) {
                 GasTank.fuel = fuel;
             } else {
@@ -67,8 +78,10 @@ public class Car {
     }
 
     public void startCar() {
-        if (GasTank.getFuel() != 0) {
-            Engine.on();
+        GasTank gasTank = new GasTank();
+        Engine engine = new Engine();
+        if (gasTank.getFuel() != 0) {
+            engine.on();
             System.out.println("\nМашина заведена.\n");
             GasTank.fuel -= 10;
         } else {
@@ -83,7 +96,8 @@ public class Car {
     }
 
     public void turnOffCar() {
-        Engine.off();
+        Engine engine = new Engine();
+        engine.off();
         System.out.println("\nМашина заглушена.\n");
         distance += 100;
     }
