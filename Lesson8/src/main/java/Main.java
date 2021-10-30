@@ -16,7 +16,6 @@ public class Main {
                 .numberWheels(4)
                 .build();
         passenger.definition();
-        passenger.getWay(603);
         System.out.println();
 
         Cargo cargo = Cargo.builder()
