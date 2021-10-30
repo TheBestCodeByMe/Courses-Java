@@ -1,6 +1,6 @@
 public class Car {
-    private static boolean carStarted;
-    private static int distance;
+    private boolean carStarted;
+    private int distance;
     private String mark;
     private int year;
 
@@ -12,18 +12,25 @@ public class Car {
     }
 
     public class Engine {
+        // Здесь переменные статические, поскольку двигатель не меняется, они всегда будут такими
         private static String engine;
         private static String type;
+        private static int id = 0;
 
         public Engine(String engine, String type) {
-            Engine.engine = engine;
-            Engine.type = type;
+            if (id == 0) {
+                Engine.engine = engine;
+                Engine.type = type;
+                id++;
+            } else {
+                System.out.println("Двигатель уже создан.");
+            }
         }
 
-        public Engine() {
-
+        public static String getType() {
+            return type;
         }
-
+/*
         private void on() {
             System.out.println("\nДвигатель включён.\n");
             Car.carStarted = true;
@@ -37,14 +44,21 @@ public class Car {
         public void viewType() {
             System.out.println("\nТип двигателя " + type + "\n");
         }
+        */
+    }
 
-        public static String getType() {
-            return type;
-        }
+    private void on() {
+        System.out.println("\nДвигатель включён.\n");
+        carStarted = true;
+    }
 
-        public void setType(String type) {
-            Engine.type = type;
-        }
+    private void off() {
+        System.out.println("\nДвигатель выключён.\n");
+        carStarted = false;
+    }
+
+    public void viewType() {
+        System.out.println("\nТип двигателя " + Car.Engine.getType() + "\n");
     }
 
     public class GasTank {
@@ -60,15 +74,13 @@ public class Car {
 
         }
 
-        public void viewFuel() {
-            System.out.println("\nОсталось " + fuel + " литров топлива.\n");
-        }
-
-        public int getFuel() {
+        public static int getFuel() {
             return fuel;
-        }
+        } //можно хотя бы здесь статический?))))) Или тоже убрать?
+        // Запуталась, как вызвать потом внизу нестатический метод
+        // Почему-то не даёт вызвать их
 
-        public void setFuel(int fuel) {
+        public static void setFuel(int fuel) {
             if ((GasTank.fuel + fuel) < totalVolumeFuel) {
                 GasTank.fuel = fuel;
             } else {
@@ -77,13 +89,15 @@ public class Car {
         }
     }
 
+    public void viewFuel() {
+        System.out.println("\nОсталось " + Car.GasTank.getFuel() + " литров топлива.\n");
+    }
+
     public void startCar() {
-        GasTank gasTank = new GasTank();
-        Engine engine = new Engine();
-        if (gasTank.getFuel() != 0) {
-            engine.on();
+        if (Car.GasTank.getFuel() != 0) {
+            on();
             System.out.println("\nМашина заведена.\n");
-            GasTank.fuel -= 10;
+            Car.GasTank.setFuel(Car.GasTank.getFuel()-10);
         } else {
             System.out.println("\nМашина не может ехать, бак пустой.\n");
         }
@@ -96,8 +110,7 @@ public class Car {
     }
 
     public void turnOffCar() {
-        Engine engine = new Engine();
-        engine.off();
+        off();
         System.out.println("\nМашина заглушена.\n");
         distance += 100;
     }
@@ -111,15 +124,15 @@ public class Car {
     }
 
     public void setCarStarted(boolean carStarted) {
-        Car.carStarted = carStarted;
+        this.carStarted = carStarted;
     }
 
-    public static int getDistance() {
+    public int getDistance() {
         return distance;
     }
 
-    public static void setDistance(int distance) {
-        Car.distance = distance;
+    public void setDistance(int distance) {
+        this.distance = distance;
     }
 
     public String getMark() {
