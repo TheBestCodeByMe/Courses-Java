@@ -13,19 +13,8 @@ public class Cargo extends GroundTransport {
 
     @Override
     public void definition() {
-        System.out.println("Марка машины - " + super.getBrand() +
-                "\nМощность - " + getNewPower() + " кВ" +
-                "\nМаксимальная скорость - " + super.getMaxSpeed() + " км/ч" +
-                "\nМасса - " + super.getWeight() + " кг" +
-                "\nКоличество колёс - " + super.getNumberWheels() +
-                "\nРасход топлива - " + super.getFuelrate() + " л/100км"+
-                "\nГрузоподъёмность - " + tonnage + " т\n");
-    }
-
-    private double getNewPower() {
-        double power;
-        power = super.getPower() * 0.74;
-        return power;
+        super.definition();
+        System.out.println("\nГрузоподъёмность - " + tonnage + " т\n");
     }
 
     public void isPossibleLoad(int weight) {

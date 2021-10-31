@@ -3,6 +3,7 @@ package transport;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import transport.ground.GroundTransport;
 
 @Getter
 @Setter
@@ -15,5 +16,11 @@ public class Transport {
 
     public void definition(){
 
+    }
+
+    protected double getNewPower() {
+        double power;
+        power = getPower() * 0.74;
+        return power;
     }
 }
