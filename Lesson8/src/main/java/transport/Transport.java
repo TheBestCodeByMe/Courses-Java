@@ -15,7 +15,10 @@ public class Transport {
     private String brand;
 
     public void definition(){
-
+        System.out.print("Марка - " + getBrand() +
+                "\nМощность - " + getNewPower() + " кВ" +
+                "\nМаксимальная скорость - " + getMaxSpeed() + " км/ч" +
+                "\nМасса - " + getWeight() + " кг");
     }
 
     protected double getNewPower() {
