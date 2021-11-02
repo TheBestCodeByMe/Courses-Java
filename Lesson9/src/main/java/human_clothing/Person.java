@@ -1,8 +1,8 @@
-package humanClothing;
+package human_clothing;
 
-import humanClothing.jacket.IJacket;
-import humanClothing.pants.IPants;
-import humanClothing.shoes.IShoes;
+import human_clothing.jacket.IJacket;
+import human_clothing.pants.IPants;
+import human_clothing.shoes.IShoes;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,13 +25,11 @@ public class Person {
         jacket.putOn();
         pants.putOn();
         shoes.putOn();
-        System.out.println();
     }
 
     public void takeOff() {
         jacket.takeOff();
         pants.takeOff();
         shoes.takeOff();
-        System.out.println();
     }
 }

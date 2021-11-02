@@ -1,8 +1,6 @@
-package humanClothing.pants;
+package human_clothing.pants;
 
 public class BlackPants implements IPants{
-    public BlackPants() {
-    }
 
     @Override
     public void putOn() {
