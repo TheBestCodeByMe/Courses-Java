@@ -1,6 +1,5 @@
 package robot;
 
-import robot.Robot;
 import robot.hands.SamsungHand;
 import robot.hands.SonyHand;
 import robot.hands.ToshibaHand;
@@ -21,6 +20,19 @@ public class Run {
         robot2.action();
         robot3.action();
 
+        // Может так? А если несколько самых дорогих, то тоже надо было
+        // что-то думать?
+        Robot[] mass = {robot1, robot2, robot3};
+        Robot expensiveRobot = mass[0];
+        for (Robot robot : mass) {
+            if (robot.getPrice() > expensiveRobot.getPrice()) {
+                expensiveRobot = robot;
+            }
+        }
+        System.out.println("Самый дорогой робот имеет следующие характеристики: ");
+        expensiveRobot.action();
+        System.out.println("И следующую цену: " + expensiveRobot.getPrice());
+/*
         if (robot1.getPrice() > robot2.getPrice()) {
             if (robot1.getPrice() > robot3.getPrice()) {
                 System.out.println("Самый дорогой робот номер 1.");
@@ -32,5 +44,6 @@ public class Run {
         } else {
             System.out.println("Самый дорогой робот номер 3.");
         }
+ */
     }
 }

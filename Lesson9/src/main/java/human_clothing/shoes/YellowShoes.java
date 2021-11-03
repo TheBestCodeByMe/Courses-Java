@@ -1,8 +1,6 @@
-package humanClothing.shoes;
+package human_clothing.shoes;
 
 public class YellowShoes implements IShoes{
-    public YellowShoes() {
-    }
 
     @Override
     public void putOn() {

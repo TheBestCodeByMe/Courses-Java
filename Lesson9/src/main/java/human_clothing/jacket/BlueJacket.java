@@ -1,8 +1,6 @@
-package humanClothing.jacket;
+package human_clothing.jacket;
 
 public class BlueJacket implements IJacket {
-    public BlueJacket() {
-    }
 
     @Override
     public void putOn() {
