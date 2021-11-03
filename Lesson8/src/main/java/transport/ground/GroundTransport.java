@@ -15,10 +15,8 @@ public class GroundTransport extends Transport {
     // А если так? Можно? Или всё же лучше всё в самый главный метод пытаться занести?
     @Override
     public void definition() {
-        System.out.println("Марка машины - " + super.getBrand() +
-                "\nМощность - " + getNewPower() + " кВ" +
-                "\nМаксимальная скорость - " + super.getMaxSpeed() + " км/ч" +
-                "\nМасса - " + super.getWeight() + " кг" +
+        super.definition();
+        System.out.println(
                 "\nКоличество колёс - " + getNumberWheels() +
                 "\nРасход топлива - " + getFuelrate() + " л/100км"
              );

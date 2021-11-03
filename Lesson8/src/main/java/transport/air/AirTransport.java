@@ -14,10 +14,8 @@ public class AirTransport extends Transport {
 
     @Override
     public void definition() {
-        System.out.println("Марка самолёта - " + super.getBrand() +
-                "\nМощность - " + getNewPower() + " кВ" +
-                "\nМаксимальная скорость - " + super.getMaxSpeed() + " км/ч" +
-                "\nМасса - " + super.getWeight() + " кг" +
+        super.definition();
+        System.out.println(
                 "\nРазмах крыльев - " + getWingspan() + " м" +
                 "\nМинимальная длина взлётно-посадочной полосы для взлёта - " + getMinRunwayLen() + " м");
     }

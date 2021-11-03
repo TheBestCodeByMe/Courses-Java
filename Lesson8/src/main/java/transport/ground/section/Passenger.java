@@ -21,7 +21,6 @@ public class Passenger extends GroundTransport {
                 "\nТип кузова - " + type +
                 "\nКоличество пассажиров - " + numberPassenger + "\n");
 
-        time = 900;
         System.out.println("За время " +
                 time + " ч, автомобиль " +
                 super.getBrand() + ", двигаясь с максимальной скоростью " +
@@ -30,13 +29,17 @@ public class Passenger extends GroundTransport {
                 getFuel(getWay(time)) + " литров топлива.");
     }
 
-    private double getWay(int time) {
+    public double getWay(int time) {
+        this.time = time;
         double way;
         way = time * super.getMaxSpeed();
         return way;
     }
 
     private double getFuel(double way) {
-        return way/100;
+        return way/100; //та вроде же так
+        // если 1 литр - 100 км
+        // а нужный Х  - way км
+        // там же расход литр на 100 км, нет?
     }
 }
