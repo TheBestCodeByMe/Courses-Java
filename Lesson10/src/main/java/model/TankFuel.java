@@ -1,14 +1,15 @@
-package car;
-
+package model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-public class GasTank {
+@Setter
+public class TankFuel {
     private int fuel;
     private int totalVolumeFuel;
 
-    public GasTank(int fuel, int totalVolumeFuel) {
+    public TankFuel(int fuel, int totalVolumeFuel) {
         this.fuel = fuel;
         this.totalVolumeFuel = totalVolumeFuel;
     }

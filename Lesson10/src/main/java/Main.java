@@ -1,23 +1,23 @@
-import car.Car;
-import car.Engine;
-import car.GasTank;
+import model.Car;
+import model.Engine;
+import model.TankFuel;
+import service.CarServiceImpl;
+import service.TankFuelImpl;
 
 public class Main {
     public static void main(String[] args) {
-        //Car car = new Car();
-        Engine engine = new Engine("двигатель", "его тип");
-        GasTank gasTank = new GasTank(56, 80);
-        Car car1 = new Car(engine, gasTank);
+        TankFuel tankFuel = new TankFuel(90, 900);
+        Car car = new Car(new Engine("engine", "type"), tankFuel);
 
-        car1.startCar();
-        car1.turnOffCar();
-        car1.viewDistance();
+        CarServiceImpl carService = new CarServiceImpl(car);
+        TankFuelImpl tankFuelService = new TankFuelImpl(car);
 
-        gasTank.setFuel(5);
-        car1.viewFuel();
+        carService.startCar();
+        carService.turnOffCar();
 
-        gasTank.setFuel(100);
-
-        car1.viewType();
+        carService.viewDistance();
+        tankFuelService.viewFuel();
+        tankFuel.setFuel(90000);
+        tankFuelService.viewFuel();
     }
 }
