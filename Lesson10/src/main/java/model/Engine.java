@@ -1,4 +1,4 @@
-package car;
+package model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,11 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Engine {
-    private String engine1;
+    private String engine;
     private String type;
 
-    public Engine(String engine1, String type) {
-        this.engine1 = engine1;
+    public Engine(String engine, String type) {
+        this.engine = engine;
         this.type = type;
     }
 }
