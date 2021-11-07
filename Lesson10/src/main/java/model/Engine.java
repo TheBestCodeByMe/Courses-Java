@@ -8,6 +8,7 @@ import lombok.Setter;
 public class Engine {
     private String engine;
     private String type;
+    private boolean startedCar;
 
     public Engine(String engine, String type) {
         this.engine = engine;

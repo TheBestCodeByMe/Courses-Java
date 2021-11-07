@@ -8,4 +8,6 @@ public interface CarService {
     void turnOffCar();
 
     void viewDistance();
+
+    void viewFuel();
 }
