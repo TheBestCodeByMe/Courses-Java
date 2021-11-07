@@ -11,10 +11,11 @@ public class Car1 {
         this.gasTank = gasTank;
     }
 
-    public class Engine{
+    public static class Engine {
         private String engine1;
         private String type;
-        Engine(String engine1, String type){
+
+        Engine(String engine1, String type) {
             this.engine1 = engine1;
             this.type = type;
         }
@@ -28,7 +29,7 @@ public class Car1 {
         }
     }
 
-    public class GasTank{
+    public static class GasTank {
         private int fuel;
         private int totalVolumeFuel;
 
@@ -69,14 +70,14 @@ public class Car1 {
     }
 
     public void viewFuel() {
-        System.out.println("\nОсталось " +  gasTank.getFuel() + " литров топлива.\n");
+        System.out.println("\nОсталось " + gasTank.getFuel() + " литров топлива.\n");
     }
 
     public void startCar() {
         if (gasTank.getFuel() != 0) {
             on();
             System.out.println("\nМашина заведена.\n");
-            gasTank.setFuel(gasTank.getFuel()-10);
+            gasTank.setFuel(gasTank.getFuel() - 10);
         } else {
             System.out.println("\nМашина не может ехать, бак пустой.\n");
         }
