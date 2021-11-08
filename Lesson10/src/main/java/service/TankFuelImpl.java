@@ -1,18 +1,20 @@
 package service;
 
-import model.Car;
 import model.TankFuel;
 
 public class TankFuelImpl implements TankFuelService {
-    Car car;
-    TankFuel tankFuel;
+    private final TankFuel tankFuel;
 
-    public TankFuelImpl(Car car) {
-        this.car = car;
+    public TankFuelImpl(TankFuel fuelTank) {
+        this.tankFuel = fuelTank;
     }
 
     public void viewFuel() {
-        tankFuel = car.getTankFuel();
         System.out.println("\nОсталось " + tankFuel.getFuel() + " литров топлива.\n");
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return tankFuel.getFuel() != 0;
     }
 }

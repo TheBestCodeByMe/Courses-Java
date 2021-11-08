@@ -1,23 +1,23 @@
 import model.Car;
 import model.Engine;
 import model.TankFuel;
+import service.CarService;
 import service.CarServiceImpl;
-import service.TankFuelImpl;
 
 public class Main {
     public static void main(String[] args) {
-        TankFuel tankFuel = new TankFuel(90, 900);
-        Car car = new Car(new Engine("engine", "type"), tankFuel);
+        TankFuel tankFuel = new TankFuel(600, 900);
+        Car car = new Car(new Engine("engine", "type"), new TankFuel(600, 900));
 
-        CarServiceImpl carService = new CarServiceImpl(car);
-        TankFuelImpl tankFuelService = new TankFuelImpl(car);
+        CarService carService = new CarServiceImpl(car);
 
         carService.startCar();
         carService.turnOffCar();
 
         carService.viewDistance();
-        tankFuelService.viewFuel();
+        carService.viewFuel();
+        carService.viewFuel();
         tankFuel.setFuel(90000);
-        tankFuelService.viewFuel();
+        carService.viewFuel();
     }
 }
