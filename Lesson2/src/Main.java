@@ -15,7 +15,7 @@ public class Main {
          * 2. Дополнительно: сделать проверку если сумма a и b больше чем максимальное значение int то вернуть -1
          **/
         public static int sum(int a, int b) { // Немного запуталась, не могу понять, почему при сравнении с суммой, оно не ловит ошибку с переполнением
-            if(a >= Integer.MAX_VALUE || b >= Integer.MAX_VALUE || a+b >= Integer.MAX_VALUE || a+b <= Integer.MIN_VALUE || a <= Integer.MIN_VALUE || b <= Integer.MIN_VALUE){
+            if((long) a+b > Integer.MAX_VALUE || (long) a + b < Integer.MIN_VALUE){
                 return -1; //
             } else return a+b;
         }
@@ -41,6 +41,7 @@ public class Main {
             {
                 return a;
             } else return b;
+            // return a>= b ? a : b;
         }
 
         /**
@@ -87,7 +88,7 @@ public class Main {
          * return 20
          */
         public static double calculateHypotenuse(int a, int b) {
-            return Math.sqrt(Math.pow(a, 2) + Math.pow(b,2)); //
+            return Math.sqrt(Math.pow(a, 2) + Math.pow(b,2)); // return Math.hypot(a, b);
         }
 
 }
