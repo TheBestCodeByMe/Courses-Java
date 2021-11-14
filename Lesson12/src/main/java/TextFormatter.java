@@ -7,8 +7,12 @@ public class TextFormatter {
         String[] mass = str.split(" ");
         boolean a = false;
         for (String s : mass) {
-            a = s.equalsIgnoreCase(new StringBuilder(s).reverse().toString());
+            a = isPalindrom(s);
         }
         return a;
+    }
+
+    private static boolean isPalindrom(String s) {
+        return s.equalsIgnoreCase(new StringBuilder(s).reverse().toString());
     }
 }
