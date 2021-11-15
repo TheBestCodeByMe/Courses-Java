@@ -1,4 +1,4 @@
-import main.java.strings.WorkWithStrings;
+import strings.WorkWithStrings;
 import work_regular.WorkWithRegular;
 
 public class Main {
