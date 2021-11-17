@@ -8,11 +8,11 @@ public class Main {
             System.out.println(value);
         }
 
-        String text = "Здравствуйте. Вот ваш заказ. Вы казак. Сделано.";
+        String text = "Добрый вечер, вот ваш заказ. Вот ваш заказ. Вы казак. Сделано.";
         if (TextFormatter.amountWords(text) > 0) {
             String[] str = text.split("\\.");
             for (String s : str) {
-                if (TextFormatter.hasPalindrom(s)) {
+                if (TextFormatter.hasPalindrom(s) || TextFormatter.amountWords(s) >= 3 && TextFormatter.amountWords(s) < 5) {
                     System.out.println(s);
                 }
             }
