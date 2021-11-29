@@ -1,9 +1,10 @@
 package store;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        // А как лучше реализовать сортировку, что-то упустила этот момент?
         Store store = new Store();
         Product apple = new Product(1, "apple", 699);
         Product pear = new Product(2, "pear", 777);
@@ -11,11 +12,11 @@ public class Main {
         Product strawberry = new Product(4, "strawberry", 60);
         Product calculate = new Product(5, "calculate", 83);
 
-        store.addProduct(apple);
-        store.addProduct(pear);
-        store.addProduct(smartphone);
-        store.addProduct(strawberry);
-        store.addProduct(calculate);
+        System.out.println(store.addProduct(apple));
+        System.out.println(store.addProduct(pear));
+        System.out.println(store.addProduct(smartphone));
+        System.out.println(store.addProduct(strawberry));
+        System.out.println(store.addProduct(calculate));
 
         viewProducts(store);
 
@@ -24,16 +25,15 @@ public class Main {
         viewProducts(store);
 
         Product newApple = new Product(1, "Apple", 699);
-        store.editProduct(newApple);
+        store.newProduct(newApple);
 
         viewProducts(store);
     }
 
     private static void viewProducts(Store store) {
-        ArrayList<Product> products = store.allProduct();
-
-        for (Product product : products) {
-            System.out.println(product);
-        }
+        List<Product> products = store.getAllProducts();
+        products.stream()
+                .toList()
+                .forEach(System.out::println);
     }
 }
