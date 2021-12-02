@@ -1,36 +1,41 @@
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.simple.parser.JSONParser;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Homework {
+    // все методы статик сделала, чтобы не создавать конструкторы)))))
+    // использовать класс, как хелперовский
+    private static String path = "D:\\Универ\\5 семестр\\СиТАиРИС\\Courses-Java-Kolosovich-Uliana\\Lesson14\\src\\main\\resources\\";
+    private static String rez = "";
 
     public static void fileReaderWriter(String input, String output, int task) {
-        File file = new File("D:\\Универ\\5 семестр\\СиТАиРИС\\Courses-Java-Kolosovich-Uliana\\Lesson14\\src\\main\\resources\\" + output);
-        try (FileReader fr = new FileReader("D:\\Универ\\5 семестр\\СиТАиРИС\\Courses-Java-Kolosovich-Uliana\\Lesson14\\src\\main\\resources\\" + input);
+        File file = new File(path + output);
+        try (FileReader fr = new FileReader(path + input);
              BufferedReader reader = new BufferedReader(fr);
              FileWriter writer = new FileWriter(file, true)) {
             String line = reader.readLine();
-            String rez = "";
             while (line != null) {
                 if (task == 1) {
                     firstTask(line, writer);
-                    line = reader.readLine();
                 } else if (task == 2) {
-                    if (!line.matches("\s{2,}")) {
-                        rez += line;
-                    }
-                    line = reader.readLine();
-                    if (line == null) {
-                        secondTask(rez, writer);
-                    }
+                    summ(line);
                 }
+                line = reader.readLine();
+            }
+            if (task == 2) {
+                secondTask(rez, writer);
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void summ(String line) {
+        if (!line.matches("\s{2,}")) {
+            rez += line;
         }
     }
 
@@ -53,7 +58,7 @@ public class Homework {
                     s = sBuilder.toString();
                 }
                 s = s.trim();
-                if (hasPalindrom(s) || (amountWords(s) >= 3 && amountWords(s) < 5)) {
+                if ((amountWords(s) >= 3 && amountWords(s) < 5) || hasPalindrom(s)) {
                     writer.write(s + "\n");
                 }
             }
@@ -61,9 +66,9 @@ public class Homework {
     }
 
     public static void thirdTask() {
-        try (FileReader fr = new FileReader("D:\\Универ\\5 семестр\\СиТАиРИС\\Courses-Java-Kolosovich-Uliana\\Lesson14\\src\\main\\resources\\hw3\\input.txt");
+        try (FileReader fr = new FileReader(path + "hw3\\input.txt");
              BufferedReader reader = new BufferedReader(fr);
-             FileReader frBlackList = new FileReader("D:\\Универ\\5 семестр\\СиТАиРИС\\Courses-Java-Kolosovich-Uliana\\Lesson14\\src\\main\\resources\\hw3\\black_list.txt");
+             FileReader frBlackList = new FileReader(path + "hw3\\black_list.txt");
              BufferedReader readerBlackList = new BufferedReader(fr)) {
             String line = reader.readLine();
             String blackList = readerBlackList.readLine();
@@ -72,6 +77,7 @@ public class Homework {
 
             while (blackList != null) {
                 stringBuilder.append(blackList + " ");
+                blackList = readerBlackList.readLine();
             }
 
             while (line != null) {
@@ -87,28 +93,30 @@ public class Homework {
     }
 
     public static void forthTask() {
-        // В файле тоже должно быть красиво записано? Потому что возникают проблемы с кодировкой
-        // Или достаточно правильного чтения из файла и вывода на консоль?
         Car car = new Car("Audi", "type", 90, "type fuel", 290, 300, 90000);
-        try (FileOutputStream outputStream = new FileOutputStream("D:\\Универ\\5 семестр\\СиТАиРИС\\Courses-Java-Kolosovich-Uliana\\Lesson14\\src\\main\\resources\\hw4\\output.txt");
+        try (FileOutputStream outputStream = new FileOutputStream(path + "hw4\\output.txt");
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream)) {
             objectOutputStream.writeObject(car);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        try (FileInputStream fileInputStream = new FileInputStream("D:\\Универ\\5 семестр\\СиТАиРИС\\Courses-Java-Kolosovich-Uliana\\Lesson14\\src\\main\\resources\\hw4\\output.txt");
+        try (FileInputStream fileInputStream = new FileInputStream(path + "hw4\\output.txt");
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             Car readCar = (Car) objectInputStream.readObject();
             System.out.println(readCar);
+            // здесь ClassNotFoundException из-за readObject()
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public static void fifthTask() throws Exception {
+    public static void fifthTask() {
+        // https://blog.ithillel.ua/articles/delaem-serializatsiyu-v-json-i-obratno-c-jackson
+        // для себя, уже не буду переделывать
+
         try {
-            Reader reader = Files.newBufferedReader(Paths.get("D:\\Универ\\5 семестр\\СиТАиРИС\\Courses-Java-Kolosovich-Uliana\\Lesson14\\src\\main\\resources\\hw5\\car.json"));
+            Reader reader = Files.newBufferedReader(Paths.get(path + "hw5\\car.json"));
 
             ObjectMapper objectMapper = new ObjectMapper();
 
@@ -124,31 +132,24 @@ public class Homework {
         }
     }
 
-    public static Object readJsonSimpleDemo(String filename) throws Exception {
-        FileReader reader = new FileReader(filename);
-        JSONParser jsonParser = new JSONParser();
-        return jsonParser.parse(reader);
-    }
-
     public static void hasBlackList(StringBuilder blackList, StringBuilder text) {
         String[] strings = blackList.toString().split(" ");
-        String[] textString = text.toString().split("(\\.)|(!)|(\\?)");
-        boolean a = true;
+        String[] textString = text.toString().split("[.!?]");
+        boolean flag = false;
         int amount = 0;
         StringBuilder resultString = new StringBuilder();
 
         for (String string : strings) {
             for (String s : textString) {
                 if (s.contains(string)) {
-                    a = true;
+                    flag = true;
                     amount++;
                     resultString.append(s + "\n");
-                    // нужно ли писать отдельный метод, чтобы одинаковые предложения не записывались?
                 }
             }
         }
 
-        if (!a) {
+        if (flag) {
             System.out.println("Текст прошёл проверку.");
         } else {
             System.out.println("Текст не прошёл проверку. " + amount + " предложений содержит нецензурные слова: \n" + resultString);
@@ -159,10 +160,7 @@ public class Homework {
         String[] mass = str.split(" ");
         boolean a = false;
         for (String s : mass) {
-            if (s.length() > 1) {
-                a = isPalindrom(s);
-            }
-            if (a) {
+            if (s.length() > 1 && isPalindrom(s)) {
                 return true;
             }
         }
