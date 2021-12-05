@@ -5,8 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static library.util.LibraryUtils.printMap;
-import static util.MyUtil.getPersonsList;
-import static util.MyUtil.printWord;
+import static util.MyUtil.*;
 
 public class Main {
     private static Random random = new Random();
@@ -18,13 +17,14 @@ public class Main {
     }
 
     private static void secondTask() {
-        // не успела сделать
-        Set<Integer> integerSet = new HashSet<>();
-//        for (int i = 0; integerSet.size() != 50; i++) {
-//            integerSet.add(random.nextInt(0, 101));
-//        }
-//        integerSet.stream().flatMap(x->range(0, 101)).distinct().collect();
-        System.out.println(integerSet);
+        System.out.println(" 2)");
+        Set<Integer> set = getSet();
+        printCollection(set, true);
+        System.out.println("\n" + set.size());
+        long count = set.stream()
+                .filter(integer -> integer % 2 == 0)
+                .count();
+        System.out.println(count);
     }
 
     private static void firstTask() {
