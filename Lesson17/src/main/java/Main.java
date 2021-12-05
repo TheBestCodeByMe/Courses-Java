@@ -57,6 +57,7 @@ public class Main {
         System.out.println();
     }
 
+
     private static void point4() {
         System.out.println(" 4)");
         List<Car> cars = List.of(

@@ -18,3 +18,4 @@ public interface ILibraryBookService {
 
     void removeBookFromLibrary(Book book);
 }
+
