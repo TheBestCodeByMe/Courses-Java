@@ -28,14 +28,12 @@ public class WorkWithRegular {
     }
 
     public static void taskFour(String str) {
-        // неправильно поняла задание сначала.. Теперь разобралась
-        // как оказалось, сама тоже правильно сделала, не успела отправить
         System.out.println(str.split("([а-я]+)|(\\s)|([a-z]*\\d+)").length);
     }
 
     public static boolean taskFive(String str) {
         Pattern pattern = Pattern.compile("[a-z15]{4,20}");
         Matcher matcher = pattern.matcher(str);
-        return matcher.find();
+        return matcher.matches();
     }
 }

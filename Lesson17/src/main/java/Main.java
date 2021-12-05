@@ -48,6 +48,16 @@ public class Main {
         names.stream().map(name -> (name.substring(0, 1).toUpperCase() + name.substring(1))).forEach(System.out::println);
     }
 
+    private static void point3() {
+        System.out.println(" 3)");
+        List<String> listNames = List.of("john", "arya", "sansa");
+        listNames.stream()
+//                .map(StringUtils::capitalize)
+                .forEach(x -> printWord(x, true));
+        System.out.println();
+    }
+
+
     private static void point4() {
         System.out.println(" 4)");
         List<Car> cars = List.of(

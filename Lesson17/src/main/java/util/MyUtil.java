@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MyUtil {
-
     private static final Random random = new Random();
 
     public static List<Integer> getIntegerList(int count, int bound) {
@@ -47,5 +46,5 @@ public class MyUtil {
                 new Person("Антон", "Антонов")
         );
     }
-
 }
+
